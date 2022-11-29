@@ -1,0 +1,66 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cyfronet-fid/eosc-user-dashboard:
+      branch: master
+      repo: https://github.com/cyfronet-fid/eosc-user-dashboard
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cyfronet-fid/eosc-user-dashboard git:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-amber-dodo.sh
+        container: qc.acc_flabby-sepia-manatee
+  QC.Doc:
+    repos:
+      github.com/cyfronet-fid/eosc-user-dashboard find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.nippy-champagne-zebra.sh
+        container: qc.doc_leaky-olive-centipede
+      github.com/cyfronet-fid/eosc-user-dashboard git:
+        commands:
+        - /usr/bin/env sh .sqa/script.silly-chestnut-walrus.sh
+        container: qc.doc_beady-razzmatazz-ocelot
+      github.com/cyfronet-fid/eosc-user-dashboard markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-denim-bongo.sh
+        container: qc.doc_sleazy-maroon-bat
+  QC.Lic:
+    repos:
+      github.com/cyfronet-fid/eosc-user-dashboard licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-russet-chimpanzee.sh
+        container: qc.lic_snoopy-periwinkle-chin
+  QC.Sec:
+    repos:
+      github.com/cyfronet-fid/eosc-user-dashboard bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-emerald-otter.sh
+        container: qc.sec_sleazy-gamboge-setter
+  QC.Sty:
+    repos:
+      github.com/cyfronet-fid/eosc-user-dashboard flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-crimson-lemming.sh
+        container: qc.sty_messy-violet-wallaby
+      github.com/cyfronet-fid/eosc-user-dashboard hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-bistre-russel.sh
+        container: qc.sty_gamy-persimmon-mist
+      github.com/cyfronet-fid/eosc-user-dashboard jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-viridian-avocet.sh
+        container: qc.sty_fuzzy-orchid-akbash
+  QC.Ver:
+    repos:
+      github.com/cyfronet-fid/eosc-user-dashboard get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snippy-carmine-zebra.sh
+        container: qc.ver_gamy-olivine-gorilla
+timeout: 1800
